@@ -1,0 +1,123 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Travel',
+    typeNamePlural: 'Travels',
+    title: {
+      type: #STANDARD,
+      label: 'Travel',
+      value: 'TravelID'
+    }
+  },
+  presentationVariant: [ { sortOrder: [ { by:         'TravelID',
+                                          direction:  #DESC }] }]
+}
+annotate view ZAP_CDS_PROJ_TRAVEL_U with
+{
+  //     @UI.facet: [ { id:            'Travel',
+  //                 purpose:       #STANDARD,
+  //                 type:          #IDENTIFICATION_REFERENCE,
+  //                 label:         'Travel',
+  //                 position:      10 },
+  //               { id:            'Booking',
+  //                 purpose:       #STANDARD,
+  //                 type:          #LINEITEM_REFERENCE,
+  //                 label:         'Booking',
+  //                 position:      20,
+  //                 targetElement: '_Booking'}]
+  @UI.facet: [{ id: 'price',
+                position: 10,
+                type: #DATAPOINT_REFERENCE,
+                purpose: #HEADER,
+                targetQualifier: 'TotalPrice' },
+
+               { id: 'status',
+                position: 20,
+                type: #DATAPOINT_REFERENCE,
+                purpose: #HEADER,
+                targetQualifier: 'Status' } ,
+                
+                { id: 'GenColl',
+                  purpose: #STANDARD,
+                  type: #COLLECTION,
+                  label: 'My General information' },
+
+                { id: 'genInfo',
+                  purpose: #STANDARD,
+                  type: #IDENTIFICATION_REFERENCE,
+                  label: 'Travel',
+                  parentId: 'GenColl'
+                },
+                 { id: 'booking',
+                  purpose: #STANDARD,
+                  type: #LINEITEM_REFERENCE,
+                  label: 'Booking',
+                  targetElement: '_Booking'
+                },
+                {
+      id: 'anotherGroup',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GenColl',
+      targetQualifier: 'anotherGroup',
+      label: 'My Another Section'}
+
+          ]
+
+  @UI: { lineItem:        [ { position: 10 , importance: #HIGH }  ],
+         identification:  [ { position: 10 } ]  }
+  TravelID;
+
+  @UI: { lineItem:        [ { position: 20 } ],
+         identification:  [ { position: 20 } ],
+         selectionField: [{ position: 10 }]  }
+
+  AgencyID;
+
+  @UI: { lineItem:        [ { position: 30 } ],
+         identification:  [ { position: 30 } ] ,
+         textArrangement: #TEXT_LAST }
+  CustomerID;
+
+  @UI: { lineItem:        [ { position: 40 } ]  }
+  @UI.fieldGroup: [{ qualifier: 'anotherGroup', position: 10, groupLabel: 'My another Group'  }]
+  BeginDate;
+
+  @UI: { lineItem:        [ { position: 50 } ]  }
+ @UI.fieldGroup: [{ qualifier: 'anotherGroup', position: 10, groupLabel: 'My another Group'  }]
+  //  @Consumption.hidden: true
+  @Consumption.filter.hidden: true
+  EndDate;
+
+  @UI: { lineItem:        [ { position: 60 } ],
+         identification:  [ { position: 60 } ]  }
+  BookingFee;
+
+  @UI: { lineItem:        [ { position: 70 } ],
+         identification:  [ { position: 70 } ]  }
+  @UI.dataPoint: { targetValueElement: 'TotalPrice' }
+  TotalPrice;
+
+  @UI: { identification:  [ { position: 80 } ]  }
+  Description;
+
+  @UI: { lineItem:        [ { position: 90 } ],
+         identification:  [ { position: 90 } ]  }
+  @UI.dataPoint: { targetValueElement: 'Status' }
+  Status;
+
+  @UI.hidden: true
+  Createdby;
+
+  @UI.hidden: true
+  Createdat;
+
+  @UI.hidden: true
+  Lastchangedby;
+
+  @UI.hidden: true
+  Lastchangedat;
+  @Consumption.filter.hidden: true
+  _Customer;
+
+}

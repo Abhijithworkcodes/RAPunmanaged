@@ -1,0 +1,5 @@
+CLASS zap_cl_cds_travel_u DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zap_cds_travel_u.
+ENDCLASS.
+
+CLASS zap_cl_cds_travel_u IMPLEMENTATION.
+ENDCLASS.
